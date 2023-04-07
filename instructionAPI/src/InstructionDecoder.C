@@ -34,7 +34,13 @@
 #include <array>
 #include <algorithm>
 
-__thread long unsigned int my_inst_addr;
+__thread unsigned long int my_inst_addr;
+
+INSTRUCTION_EXPORT unsigned long int
+get_inst_addr(void)
+{
+  return my_inst_addr;
+}
 
 namespace {
 	namespace ia = Dyninst::InstructionAPI;
