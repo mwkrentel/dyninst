@@ -34,6 +34,8 @@
 #include <array>
 #include <algorithm>
 
+__thread long unsigned int my_inst_addr;
+
 namespace {
 	namespace ia = Dyninst::InstructionAPI;
 	using ui = ia::InstructionDecoder::unknown_instruction;
@@ -74,8 +76,10 @@ namespace Dyninst
       return ins;
     }
     
-    INSTRUCTION_EXPORT Instruction InstructionDecoder::decode(const unsigned char* b)
+    INSTRUCTION_EXPORT Instruction InstructionDecoder::decode(const unsigned char* b, Address myaddr)
     {
+      my_inst_addr = myaddr;
+
       buffer tmp(b, b+maxInstructionLength);
       return m_Impl->decode(tmp);
     }

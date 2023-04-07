@@ -756,7 +756,7 @@ StackAnalysis::Height StackAnalysis::getStackCleanAmount(Function *func_) {
       Block *ret = *rets;
       cur = (unsigned char *) ret->region()->getPtrToInstruction(
          ret->lastInsnAddr());
-      Instruction insn = decoder.decode(cur);
+      Instruction insn = decoder.decode(cur, ret->start());
 
       entryID what = insn.getOperation().getID();
       if (what != e_ret_near) continue;

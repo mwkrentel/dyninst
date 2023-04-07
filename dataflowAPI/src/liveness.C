@@ -369,7 +369,7 @@ bool LivenessAnalyzer::query(Location loc, Type type, bitArray &bitarray) {
      ReadWriteInfo rw;
      if(!cachedLivenessInfo.getLivenessInfo(curInsnAddr, loc.func, rw))
      {
-        Instruction tmp = decoder.decode(insnBuffer);
+        Instruction tmp = decoder.decode(insnBuffer, curInsnAddr);
         rw = calcRWSets(tmp, loc.block, curInsnAddr);
         cachedLivenessInfo.insertInstructionInfo(curInsnAddr, rw, loc.func);
      }
